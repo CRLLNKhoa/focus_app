@@ -12,6 +12,7 @@ import LeftMenuApp from "@/components/layout/left-menu-app";
 import Calendar from "@/components/layout/calendar";
 import { Toaster } from "react-hot-toast";
 import Soundboard from "@/components/layout/soundboard";
+import { ClerkProvider } from "@clerk/nextjs";
 
 export const metadata: Metadata = {
   title: {
@@ -39,30 +40,32 @@ export default function RootLayout({
   return (
     <html suppressHydrationWarning lang="vi">
       <head />
-      <body
-        className={clsx(
-          "min-h-screen bg-background font-sans antialiased",
-          fontSans.variable,
-        )}
-      >
-        <Providers themeProps={{ attribute: "class", defaultTheme: "dark" }}>
-          <>
-            <div className="relative w-full h-screen">
-              {children}
-            </div>
-
-            <LeftSidebarTop />
-            <LeftMenuApp />
-            <RightSidebarTop />
-
-            <Calendar />
-            <Soundboard />
-
-
-            <Toaster />
-          </>
-        </Providers>
-      </body>
+      <ClerkProvider>
+        <body
+          className={clsx(
+            "min-h-screen bg-background font-sans antialiased",
+            fontSans.variable,
+          )}
+        >
+          <Providers themeProps={{ attribute: "class", defaultTheme: "dark" }}>
+            <>
+              <div className="relative w-full h-screen">
+                {children}
+              </div>
+  
+              <LeftSidebarTop />
+              <LeftMenuApp />
+              <RightSidebarTop />
+  
+              <Calendar />
+              <Soundboard />
+  
+  
+              <Toaster />
+            </>
+          </Providers>
+        </body>
+      </ClerkProvider>
     </html>
   );
 }
