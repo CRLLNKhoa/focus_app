@@ -1,56 +1,54 @@
-import { Link } from "@nextui-org/link";
-import { Snippet } from "@nextui-org/snippet";
-import { Code } from "@nextui-org/code";
-import { button as buttonStyles } from "@nextui-org/theme";
+"use client";
+import ReactPlayer from "react-player";
+import { useEffect, useState } from "react";
+import { useVideoStore } from "@/stores/video";
 
-import { siteConfig } from "@/config/site";
-import { title, subtitle } from "@/components/primitives";
-import { GithubIcon } from "@/components/icons";
+import { cn } from "@/libs/utils";
 
 export default function Home() {
+  const [isClient, setIsClient] = useState(false);
+  const muted = useVideoStore((state) => state.muted);
+  const volume = useVideoStore((state) => state.volume);
+  const fullscreen = useVideoStore((state) => state.fullscreen);
+  const playing = useVideoStore((state) => state.playing);
+  const setPlaying = useVideoStore((state) => state.togglePlaying);
+
+  useEffect(() => {
+    setIsClient(true);
+  }, []);
+
   return (
-    <section className="flex flex-col items-center justify-center gap-4 py-8 md:py-10">
-      <div className="inline-block max-w-xl text-center justify-center">
-        <span className={title()}>Make&nbsp;</span>
-        <span className={title({ color: "violet" })}>beautiful&nbsp;</span>
-        <br />
-        <span className={title()}>
-          websites regardless of your design experience.
-        </span>
-        <div className={subtitle({ class: "mt-4" })}>
-          Beautiful, fast and modern React UI library.
+    <section className="w-full h-full bg-black overflow-hidden relative">
+      {isClient ? (
+        <ReactPlayer
+          url="https://www.youtube.com/watch?v=Y38ZhAArqfY"
+          loop={true}
+          muted={muted}
+          autoPlay={true}
+          playing={playing}
+          onReady={() => setPlaying()}
+          className={cn("absolute top-0 left-0 bottom-0 right-0",
+            fullscreen ? "object-cover" : "object-contain",
+          )}
+          width="100%"
+          height="100%"
+          fullscreen={fullscreen}
+          volume={volume}
+          config={{
+            youtube: {
+              playerVars: {
+                showinfo: 0,
+                controls: 0,
+              },
+            },
+          }}
+        />
+      ) : (
+        <div className={"w-full h-full bg-transparent"}>
+          <h1>Loading...</h1>
         </div>
-      </div>
-
-      <div className="flex gap-3">
-        <Link
-          isExternal
-          className={buttonStyles({
-            color: "primary",
-            radius: "full",
-            variant: "shadow",
-          })}
-          href={siteConfig.links.docs}
-        >
-          Documentation
-        </Link>
-        <Link
-          isExternal
-          className={buttonStyles({ variant: "bordered", radius: "full" })}
-          href={siteConfig.links.github}
-        >
-          <GithubIcon size={20} />
-          GitHub
-        </Link>
-      </div>
-
-      <div className="mt-8">
-        <Snippet hideCopyButton hideSymbol variant="bordered">
-          <span>
-            Get started by editing <Code color="primary">app/page.tsx</Code>
-          </span>
-        </Snippet>
-      </div>
+      )}
+      <div className={"absolute top-0 left-0 bottom-0 right-0"}></div>
     </section>
   );
 }

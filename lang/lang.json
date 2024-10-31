@@ -1,0 +1,93 @@
+{
+  "en": {
+    "title": "Next.js + NextUI",
+    "description": "Make beautiful websites regardless of your design experience.",
+    "tooltipBtnSteak": "View daily metrics",
+    "menuAccountDropdown": {
+      "item1": "My Account",
+      "item2": "Appearance",
+      "item3": "Feedback",
+      "item4": "Bug report"
+    },
+    "titleTheme": {
+      "dark": "Dark Mode",
+      "light": "Light Mode"
+    },
+    "lang": "Langue",
+    "focusMode":  {
+      "item1": "Hide Elements",
+      "item2": "Hide After (seconds)"
+    },
+    "account": {
+      "title": "Account",
+      "email": "Email",
+      "password": "Password",
+      "login": "Login",
+      "register": "Register",
+      "logout": "Logout"
+    },
+    "modalEdit": {
+      "title": "Edit Events",
+      "titleEmpty": "No events to edit"
+    },
+    "modalAdd": {
+      "title": "Add Event",
+      "titleButton": "Add Event",
+      "titleInputTitle": "Title",
+      "titleInputDescription": "Description",
+      "titleInputDate": "Date and time range",
+      "titleInputColor": "Select color"
+    },
+    "menu": {
+      "item1": "Spaces",
+      "item2": "Sounds",
+      "item3": "Calendar"
+    }
+  } ,
+  "vi": {
+    "title": "Next.js + NextUI",
+    "description": "Make beautiful websites regardless of your design experience.",
+    "tooltipBtnSteak": "Xem số liệu hàng ngày",
+    "menuAccountDropdown": {
+      "item1": "Tải khoản",
+      "item2": "Cài đặt giao diện",
+      "item3": "Phản hồi",
+      "item4": "Báo cáo lỗi"
+    },
+    "titleTheme": {
+      "dark": "Chủ đề tối",
+      "light": "Chủ đề sáng"
+    },
+    "lang": "Ngôn ngữ",
+    "focusMode":  {
+      "item1": "Ẩn giao diện",
+      "item2": "Ẩn sau (giây)"
+    },
+    "account": {
+      "title": "Tải khoản",
+      "email": "Email",
+      "password": "Mat khau",
+      "login": "Dang nhap",
+      "register": "Dang ky",
+      "logout": "Đăng xuất"
+    },
+    "modalEdit": {
+      "title": "Chỉnh sửa sự kiện",
+      "titleEmpty": "Chưa có sự kiện nào !"
+    },
+    "modalAdd": {
+      "title": "Thêm sự kiện",
+      "titleButton": "Thêm mới",
+      "titleInputTitle": "Tên sự kiện",
+      "titleInputDescription": "Mô tả sự kiện",
+      "titleInputDate": "Chọn ngày và thời gian",
+      "titleInputColor": "Chọn màu nền"
+    },
+    "menu": {
+      "item1": "Ảnh nền",
+      "item2": "Âm thanh",
+      "item3": "Lịch"
+    }
+
+  }
+}

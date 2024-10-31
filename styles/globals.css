@@ -1,3 +1,23 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+
+.fc-toolbar-title {
+    font-size: medium !important;
+    font-weight: 600 !important;
+}
+
+.fc-button {
+    font-size: small !important;
+    font-weight: 500 !important;
+    text-transform: capitalize !important;
+}
+
+.fc-daygrid-day {
+    width: 100% !important; /* Đảm bảo các ngày có chiều rộng tự động */
+  }
+
+  .noscroll-bar::-webkit-scrollbar {
+        width: 0px !important;           
+  }

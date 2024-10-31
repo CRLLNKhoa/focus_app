@@ -12,11 +12,13 @@ import { SunFilledIcon, MoonFilledIcon } from "@/components/icons";
 export interface ThemeSwitchProps {
   className?: string;
   classNames?: SwitchProps["classNames"];
+  id?: string
 }
 
 export const ThemeSwitch: FC<ThemeSwitchProps> = ({
   className,
   classNames,
+  id = "themeToggle"
 }) => {
   const { theme, setTheme } = useTheme();
   const isSSR = useIsSSR();
@@ -47,6 +49,7 @@ export const ThemeSwitch: FC<ThemeSwitchProps> = ({
           classNames?.base,
         ),
       })}
+      id={id}
     >
       <VisuallyHidden>
         <input {...getInputProps()} />
