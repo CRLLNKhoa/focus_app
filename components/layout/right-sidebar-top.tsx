@@ -1,5 +1,5 @@
 "use client";
-import React, { useEffect, useState } from "react";
+import React, { Suspense, useEffect, useState } from "react";
 import { Button } from "@nextui-org/button";
 import {
   IconArrowsMaximize,
@@ -71,153 +71,155 @@ const RightSidebarTop = () => {
 
   return (
     <>
-      <div className={"absolute right-2 top-2 flex items-center gap-2"}>
-        <div
-          className={
-            "bg-white dark:bg-[#232931] p-[6px] px-2 rounded-md flex items-center gap-2"
-          }
-        >
-          <Button radius={"sm"} variant={"light"}>
-            <IconPointFilled className={"text-green-500"} />
-            {`${6} Online`}
-          </Button>
-          <div className={"border-x border-border dark:border-slate-600 px-2"}>
-            <Dropdown offset={10}>
-              <DropdownTrigger>
-                <Button
-                  variant="light"
-                  radius={"sm"}
-                  startContent={<IconDoor stroke={1.25} />}
-                  endContent={<IconChevronDown stroke={1.25} />}
-                >
-                  {host ? host : "Phòng của tôi"}
-                </Button>
-              </DropdownTrigger>
-              <DropdownMenu aria-label="Static Actions">
-                <DropdownItem
-                  key="account"
-                  startContent={<IconUserCircle stroke={1.25} />}
-                >
-                  {t.menuAccountDropdown.item1}
-                </DropdownItem>
-                <DropdownItem
-                  onPress={() => onOpen()}
-                  key="account"
-                  startContent={<IconSettings stroke={1.25} />}
-                >
-                  {t.menuAccountDropdown.item2}
-                </DropdownItem>
-                <DropdownItem
-                  key="account"
-                  startContent={<IconMail stroke={1.25} />}
-                >
-                  {t.menuAccountDropdown.item3}
-                </DropdownItem>
-                <DropdownItem
-                  key="account"
-                  startContent={<IconBug stroke={1.25} />}
-                >
-                  {t.menuAccountDropdown.item4}
-                </DropdownItem>
-              </DropdownMenu>
-            </Dropdown>
-          </div>
-
-          <Button radius={"sm"} variant={"light"}>
-            Invite
-          </Button>
-        </div>
-        <div
-          className={
-            "bg-white dark:bg-[#232931] p-[6px] px-2 rounded-md flex items-center"
-          }
-        >
-           <Button
-            onPress={() => {
-              togglePlaying();
-            }}
-            radius={"sm"}
-            isIconOnly
-            variant={"light"}
-          >
-            {playing ? <IconPlayerPause stroke={1.5} /> : <IconPlayerPlay stroke={1.5} />}
-          </Button>
-          <Button
-            onPress={() => {
-              toggleMuted();
-            }}
-            radius={"sm"}
-            isIconOnly
-            variant={"light"}
-          >
-            {muted ? <IconVolume3 stroke={1.5} /> : <IconVolume stroke={1.5} />}
-          </Button>
-          <Button radius={"sm"} isIconOnly variant={"light"}>
-            <IconBell stroke={1.25} />
-          </Button>
-          <Button
-            onPress={() => {
-              if (!document.fullscreenElement) {
-                document.documentElement.requestFullscreen();
-                toggleFullscreen(true);
-                setFullScreen(true);
-              } else if (document.exitFullscreen) {
-                document.exitFullscreen();
-                toggleFullscreen(false);
-                setFullScreen(false);
-              }
-            }}
-            radius={"sm"}
-            isIconOnly
-            variant={"light"}
-          >
-            {!fullScreen ? (
-              <IconArrowsMaximize stroke={1.5} />
-            ) : (
-              <IconArrowsMinimize stroke={1.5} />
-            )}
-          </Button>
+      <Suspense>
+        <div className={"absolute right-2 top-2 flex items-center gap-2"}>
           <div
-            className={"border-l border-border dark:border-slate-600 pl-2 ml-2"}
+            className={
+              "bg-white dark:bg-[#232931] p-[6px] px-2 rounded-md flex items-center gap-2"
+            }
           >
-            <Dropdown offset={10}>
-              <DropdownTrigger>
-                <Button variant="light" radius={"sm"} isIconOnly>
-                  <IconUser stroke={1.5} />
-                </Button>
-              </DropdownTrigger>
-              <DropdownMenu aria-label="Static Actions">
-                <DropdownItem
-                  onPress={() => onOpenAccount()}
-                  key="account"
-                  startContent={<IconUserCircle stroke={1.25} />}
-                >
-                  {t.menuAccountDropdown.item1}
-                </DropdownItem>
-                <DropdownItem
-                  onPress={() => onOpen()}
-                  key="setting"
-                  startContent={<IconSettings stroke={1.25} />}
-                >
-                  {t.menuAccountDropdown.item2}
-                </DropdownItem>
-                <DropdownItem
-                  key="feedback"
-                  startContent={<IconMail stroke={1.25} />}
-                >
-                  {t.menuAccountDropdown.item3}
-                </DropdownItem>
-                <DropdownItem
-                  key="reportbug"
-                  startContent={<IconBug stroke={1.25} />}
-                >
-                  {t.menuAccountDropdown.item4}
-                </DropdownItem>
-              </DropdownMenu>
-            </Dropdown>
+            <Button radius={"sm"} variant={"light"}>
+              <IconPointFilled className={"text-green-500"} />
+              {`${6} Online`}
+            </Button>
+            <div className={"border-x border-border dark:border-slate-600 px-2"}>
+              <Dropdown offset={10}>
+                <DropdownTrigger>
+                  <Button
+                    variant="light"
+                    radius={"sm"}
+                    startContent={<IconDoor stroke={1.25} />}
+                    endContent={<IconChevronDown stroke={1.25} />}
+                  >
+                    {host ? host : "Phòng của tôi"}
+                  </Button>
+                </DropdownTrigger>
+                <DropdownMenu aria-label="Static Actions">
+                  <DropdownItem
+                    key="account"
+                    startContent={<IconUserCircle stroke={1.25} />}
+                  >
+                    {t.menuAccountDropdown.item1}
+                  </DropdownItem>
+                  <DropdownItem
+                    onPress={() => onOpen()}
+                    key="account"
+                    startContent={<IconSettings stroke={1.25} />}
+                  >
+                    {t.menuAccountDropdown.item2}
+                  </DropdownItem>
+                  <DropdownItem
+                    key="account"
+                    startContent={<IconMail stroke={1.25} />}
+                  >
+                    {t.menuAccountDropdown.item3}
+                  </DropdownItem>
+                  <DropdownItem
+                    key="account"
+                    startContent={<IconBug stroke={1.25} />}
+                  >
+                    {t.menuAccountDropdown.item4}
+                  </DropdownItem>
+                </DropdownMenu>
+              </Dropdown>
+            </div>
+  
+            <Button radius={"sm"} variant={"light"}>
+              Invite
+            </Button>
+          </div>
+          <div
+            className={
+              "bg-white dark:bg-[#232931] p-[6px] px-2 rounded-md flex items-center"
+            }
+          >
+             <Button
+              onPress={() => {
+                togglePlaying();
+              }}
+              radius={"sm"}
+              isIconOnly
+              variant={"light"}
+            >
+              {playing ? <IconPlayerPause stroke={1.5} /> : <IconPlayerPlay stroke={1.5} />}
+            </Button>
+            <Button
+              onPress={() => {
+                toggleMuted();
+              }}
+              radius={"sm"}
+              isIconOnly
+              variant={"light"}
+            >
+              {muted ? <IconVolume3 stroke={1.5} /> : <IconVolume stroke={1.5} />}
+            </Button>
+            <Button radius={"sm"} isIconOnly variant={"light"}>
+              <IconBell stroke={1.25} />
+            </Button>
+            <Button
+              onPress={() => {
+                if (!document.fullscreenElement) {
+                  document.documentElement.requestFullscreen();
+                  toggleFullscreen(true);
+                  setFullScreen(true);
+                } else if (document.exitFullscreen) {
+                  document.exitFullscreen();
+                  toggleFullscreen(false);
+                  setFullScreen(false);
+                }
+              }}
+              radius={"sm"}
+              isIconOnly
+              variant={"light"}
+            >
+              {!fullScreen ? (
+                <IconArrowsMaximize stroke={1.5} />
+              ) : (
+                <IconArrowsMinimize stroke={1.5} />
+              )}
+            </Button>
+            <div
+              className={"border-l border-border dark:border-slate-600 pl-2 ml-2"}
+            >
+              <Dropdown offset={10}>
+                <DropdownTrigger>
+                  <Button variant="light" radius={"sm"} isIconOnly>
+                    <IconUser stroke={1.5} />
+                  </Button>
+                </DropdownTrigger>
+                <DropdownMenu aria-label="Static Actions">
+                  <DropdownItem
+                    onPress={() => onOpenAccount()}
+                    key="account"
+                    startContent={<IconUserCircle stroke={1.25} />}
+                  >
+                    {t.menuAccountDropdown.item1}
+                  </DropdownItem>
+                  <DropdownItem
+                    onPress={() => onOpen()}
+                    key="setting"
+                    startContent={<IconSettings stroke={1.25} />}
+                  >
+                    {t.menuAccountDropdown.item2}
+                  </DropdownItem>
+                  <DropdownItem
+                    key="feedback"
+                    startContent={<IconMail stroke={1.25} />}
+                  >
+                    {t.menuAccountDropdown.item3}
+                  </DropdownItem>
+                  <DropdownItem
+                    key="reportbug"
+                    startContent={<IconBug stroke={1.25} />}
+                  >
+                    {t.menuAccountDropdown.item4}
+                  </DropdownItem>
+                </DropdownMenu>
+              </Dropdown>
+            </div>
           </div>
         </div>
-      </div>
+      </Suspense>
 
       <Modal size={"xl"} isOpen={isOpen} onOpenChange={onOpenChange}>
         <ModalContent>
