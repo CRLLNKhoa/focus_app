@@ -1,5 +1,5 @@
 "use client";
-import React, { useState } from "react";
+import React from "react";
 import { AnimatePresence, motion } from "framer-motion";
 import SoundButton from "../SoundButton";
 import { Button } from "@nextui-org/button";
