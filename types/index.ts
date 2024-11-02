@@ -12,3 +12,14 @@ export type TEvent = {
   description: string,
   color: string,
 }
+
+export type TSpace = {
+  id?: string,
+  title: string,
+  key: string,
+  view?: number,
+  created_at?: any,
+  link: string,
+  src: string,
+  image: string,
+}

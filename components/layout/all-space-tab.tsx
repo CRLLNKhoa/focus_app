@@ -1,15 +1,29 @@
+/* eslint-disable react/self-closing-comp */
 "use client";
-import React, { useRef } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import { listBtnFilter } from "@/config/category";
 import { Button } from "@nextui-org/button";
 import { Tooltip } from "@nextui-org/tooltip";
 import { ScrollShadow } from "@nextui-org/scroll-shadow";
 import { useLangStore } from "@/stores/lang";
 import CardSpace from "../card-space";
+import { useQuery } from "@tanstack/react-query";
+import { getSpaces } from "@/actions/space";
+import { TSpace } from "@/types";
+import { Skeleton } from "@nextui-org/skeleton";
 
 function AllSpaceTab() {
   const scrollRef = useRef<any>(null);
   const t = useLangStore((state) => state.lang);
+  const [listSpace, setListSpace] = useState<TSpace[]>([]);
+  const {data, isLoading} = useQuery({
+    queryKey: ["space"],
+    queryFn: () => getSpaces()
+  })
+
+  useEffect(() => {
+    setListSpace(data?.data || [])
+  }, [data]);
 
   const handleWheel = (event: any) => {
     event.preventDefault();
@@ -25,9 +39,9 @@ function AllSpaceTab() {
         <div
           ref={scrollRef}
           onWheel={handleWheel}
-          className=" w-full overflow-x-auto flex items-center gap-2  pr-2 pb-1"
+          className=" w-full overflow-x-auto flex items-center gap-2 pr-2 pb-1 custom-scrollbar"
         >
-          <Button
+          <Button onPress={() => setListSpace(data?.data || [])}
             isIconOnly
             radius="sm"
             variant="faded"
@@ -43,7 +57,7 @@ function AllSpaceTab() {
               content={item.label}
               placement="bottom"
             >
-              <Button isIconOnly radius="sm" variant="bordered">
+              <Button onPress={() => setListSpace(data?.data?.filter((space) => space.key === item.key) || [])} isIconOnly radius="sm" variant="bordered">
                 <img src={item.icon} alt="natural" className="size-6" />
               </Button>
             </Tooltip>
@@ -59,14 +73,37 @@ function AllSpaceTab() {
           </h2>
         </div>
         <div className="grid grid-cols-2 mt-2 gap-2">
-          <CardSpace />
-          <CardSpace />
-          <CardSpace />
-          <CardSpace />
-          <CardSpace />
-          <CardSpace />
-          <CardSpace />
-          <CardSpace />
+          {listSpace.map((item) => (
+            <CardSpace key={item.id} data={item} />
+          ))}
+          {isLoading && (
+            <>
+              <Skeleton className="rounded-lg">
+              <div className="h-24 rounded-lg bg-default-300"></div>
+              </Skeleton>
+              <Skeleton className="rounded-lg">
+              <div className="h-24 rounded-lg bg-default-300"></div>
+              </Skeleton>
+              <Skeleton className="rounded-lg">
+              <div className="h-24 rounded-lg bg-default-300"></div>
+              </Skeleton>
+              <Skeleton className="rounded-lg">
+              <div className="h-24 rounded-lg bg-default-300"></div>
+              </Skeleton>
+              <Skeleton className="rounded-lg">
+              <div className="h-24 rounded-lg bg-default-300"></div>
+              </Skeleton>
+              <Skeleton className="rounded-lg">
+              <div className="h-24 rounded-lg bg-default-300"></div>
+              </Skeleton>
+              <Skeleton className="rounded-lg">
+              <div className="h-24 rounded-lg bg-default-300"></div>
+              </Skeleton>
+              <Skeleton className="rounded-lg">
+              <div className="h-24 rounded-lg bg-default-300"></div>
+              </Skeleton>
+            </>
+          )}
         </div>
       </div>
     </div>

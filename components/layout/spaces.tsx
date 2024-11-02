@@ -5,7 +5,7 @@ import { Tabs, Tab } from "@nextui-org/tabs";
 import { useLangStore } from "@/stores/lang";
 import AllSpaceTab from "./all-space-tab";
 import { Button } from "@nextui-org/button";
-import { IconCaretLeft, IconHeart, IconVolume, IconVolumeOff, IconX } from "@tabler/icons-react";
+import {  IconHeart, IconVolume, IconVolumeOff, IconX } from "@tabler/icons-react";
 import { useVideoStore } from "@/stores/video";
 import { Slider } from "@nextui-org/slider";
 import { useToggleStore } from "@/stores/toggle";
@@ -18,6 +18,7 @@ function Spaces() {
   const setMuted = useVideoStore((state) => state.toggleMuted);
   const isShow = useToggleStore((state) => state.space);
   const toggleSpace = useToggleStore((state) => state.toggleSpace);
+  const video = useVideoStore((state) => state.video);
 
   const handleVolumeChange = (value:any) => {
     if (isNaN(Number(value))) return;
@@ -60,8 +61,8 @@ function Spaces() {
           sticky bottom-0 bg-white dark:bg-[#232931] z-10">
             <div className="w-full flex items-center justify-between">
                 <div className="flex flex-col gap-1">
-                    <h2 className="line-clamp-1 text-sm">Cozy Coffee Shop Wit</h2> 
-                    <p className="text-xs bg-gradient-to-r from-red-600 to-purple-400 inline-block text-transparent bg-clip-text">@AnimatePresence</p>
+                    <h2 className="line-clamp-1 text-sm">{video.title !== "" ? video.title : "Loading..."}</h2> 
+                    <p className="text-xs bg-gradient-to-r from-red-600 to-purple-400 inline-block text-transparent bg-clip-text">@{video.src !== "" ? video.src : "Loading..."}</p>
                 </div>
                 <Button isIconOnly variant="light" className="text-red-500">
                     <IconHeart stroke={1.2} />

@@ -1,16 +1,11 @@
-/* eslint-disable jsx-a11y/click-events-have-key-events */
-/* eslint-disable jsx-a11y/no-static-element-interactions */
 "use client";
-import React, { use } from "react";
+import React from "react";
 import { Image } from "@nextui-org/image";
 import { TSpace } from "@/types";
-import { useVideoStore } from "@/stores/video";
 
-function CardSpace({data}:{data:TSpace}) {
-  const setVideo = useVideoStore((state) => state.setVideo);
-
+function CardSpaceAdmin({data}:{data:TSpace}) {
   return (
-    <div className="flex flex-col" onClick={() => setVideo(data)}>
+    <div className="flex flex-col">
       <div className="w-full group">
         <Image
           height={90}
@@ -26,4 +21,4 @@ function CardSpace({data}:{data:TSpace}) {
   );
 }
 
-export default CardSpace;
+export default CardSpaceAdmin;
