@@ -14,7 +14,7 @@
       "light": "Light Mode"
     },
     "lang": "Langue",
-    "focusMode":  {
+    "focusMode": {
       "item1": "Hide Elements",
       "item2": "Hide After (seconds)"
     },
@@ -42,8 +42,20 @@
       "item1": "Spaces",
       "item2": "Sounds",
       "item3": "Calendar"
+    },
+    "spaces": {
+      "tab": {
+        "item1": "All Spaces",
+        "item2": "Favorites"
+      },
+      "alltab": {
+        "title1": "Featured Spaces",
+        "subtitle1": "Trending Spaces",
+        "title2": "Recommended Spaces"
+      }
     }
-  } ,
+  },
+  
   "vi": {
     "title": "Next.js + NextUI",
     "description": "Make beautiful websites regardless of your design experience.",
@@ -59,7 +71,7 @@
       "light": "Chủ đề sáng"
     },
     "lang": "Ngôn ngữ",
-    "focusMode":  {
+    "focusMode": {
       "item1": "Ẩn giao diện",
       "item2": "Ẩn sau (giây)"
     },
@@ -84,10 +96,20 @@
       "titleInputColor": "Chọn màu nền"
     },
     "menu": {
-      "item1": "Ảnh nền",
-      "item2": "Âm thanh",
+      "item1": "Nền",
+      "item2": "Nhạc",
       "item3": "Lịch"
+    },
+    "spaces": {
+      "tab": {
+        "item1": "Tất cả không gian",
+        "item2": "Yêu thích"
+      },
+      "alltab": {
+        "title1": "Không gian nổi bật",
+        "subtitle1": "Thịnh hành",
+        "title2": "Không gian được đề xuất"
+      }
     }
-
   }
 }

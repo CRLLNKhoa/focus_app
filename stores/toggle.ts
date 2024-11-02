@@ -7,6 +7,9 @@ type storeType = {
 
   soundboard: boolean;
   toggleSoundboard: (t:boolean) => void
+
+  space: boolean;
+  toggleSpace: (t:boolean) => void
 } 
 
 export const useToggleStore = create<storeType>((set) => ({
@@ -15,4 +18,7 @@ export const useToggleStore = create<storeType>((set) => ({
 
   soundboard: false,
   toggleSoundboard: (t) => set(() => ({ soundboard: t })),
+
+  space: false,
+  toggleSpace: (t) => set(() => ({ space: t })),
 }))

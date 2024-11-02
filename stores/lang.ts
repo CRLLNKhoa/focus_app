@@ -9,7 +9,7 @@ type langStoreType = {
 
 export const useLangStore = create<langStoreType>((set) => ({
   // @ts-ignore
-  lang: l["vi"],
+  lang: l.vi,
   // @ts-ignore
   setLang: (lang) => set({ lang: l[lang] })
 }))

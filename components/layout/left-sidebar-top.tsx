@@ -8,6 +8,7 @@ import { useLangStore } from "@/stores/lang";
 
 const LeftSidebarTop = () => {
   const t = useLangStore((state) => state.lang)
+  
   return (
     <div className={" absolute top-2 left-2 flex items-center gap-2"}>
       <div className={"bg-white dark:bg-[#232931] p-[6px] px-2 flex items-center gap-1 rounded-md"}>

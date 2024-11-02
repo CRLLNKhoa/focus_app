@@ -195,8 +195,8 @@ function Calendar() {
             animate={{ opacity: 1, scale: 1, x: 0, y: 0 }}
             exit={{ opacity: 0, scale: 0.5, x: -100, y: 0 }}
             transition={{ duration: 0.2 }}
-            className="absolute top-16 left-[114px] bg-white bottom-2 w-[420px]
-              dark:bg-[#232931] p-2 flex flex-col rounded-md gap-2"
+            className="absolute top-16 left-[102px] bg-white bottom-2 w-[420px]
+              dark:bg-[#232931] p-2 flex flex-col rounded-md gap-2 z-50 shadow-xl"
           >
             {isLoading ? (
               <div className="h-full flex flex-col items-center justify-center">

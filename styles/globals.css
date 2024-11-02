@@ -21,3 +21,23 @@
   .noscroll-bar::-webkit-scrollbar {
         width: 0px !important;           
   }
+
+  .custom-scrollbar{
+    scroll-behavior: 'smooth',
+  }
+
+  .custom-scrollbar::-webkit-scrollbar {
+    width: 4px!important;
+    height: 6px!important;
+    cursor: pointer;
+  }
+
+  .custom-scrollbar::-webkit-scrollbar-track {
+    background-color: transparent;
+    cursor: pointer;
+  }
+
+  .custom-scrollbar::-webkit-scrollbar-thumb {
+    background-color: #ccc;
+    border-radius: 2px;
+  }

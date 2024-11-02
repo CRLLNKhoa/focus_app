@@ -78,7 +78,7 @@ const RightSidebarTop = () => {
               "bg-white dark:bg-[#232931] p-[6px] px-2 rounded-md flex items-center gap-2"
             }
           >
-            <Button radius={"sm"} variant={"light"}>
+            <Button size="sm" radius={"sm"} variant={"light"} className="text-sm">
               <IconPointFilled className={"text-green-500"} />
               {`${6} Online`}
             </Button>
@@ -88,6 +88,7 @@ const RightSidebarTop = () => {
                   <Button
                     variant="light"
                     radius={"sm"}
+                    size="sm" className="text-sm"
                     startContent={<IconDoor stroke={1.25} />}
                     endContent={<IconChevronDown stroke={1.25} />}
                   >
@@ -124,16 +125,16 @@ const RightSidebarTop = () => {
               </Dropdown>
             </div>
   
-            <Button radius={"sm"} variant={"light"}>
+            <Button className="text-sm" size="sm" radius={"sm"} variant={"light"}>
               Invite
             </Button>
           </div>
           <div
             className={
-              "bg-white dark:bg-[#232931] p-[6px] px-2 rounded-md flex items-center"
+              "bg-white dark:bg-[#232931] p-[6px] px-2 rounded-md flex items-center gap-2"
             }
           >
-             <Button
+             <Button size="sm"
               onPress={() => {
                 togglePlaying();
               }}
@@ -143,7 +144,7 @@ const RightSidebarTop = () => {
             >
               {playing ? <IconPlayerPause stroke={1.5} /> : <IconPlayerPlay stroke={1.5} />}
             </Button>
-            <Button
+            <Button size="sm"
               onPress={() => {
                 toggleMuted();
               }}
@@ -153,10 +154,10 @@ const RightSidebarTop = () => {
             >
               {muted ? <IconVolume3 stroke={1.5} /> : <IconVolume stroke={1.5} />}
             </Button>
-            <Button radius={"sm"} isIconOnly variant={"light"}>
+            <Button size="sm" radius={"sm"} isIconOnly variant={"light"}>
               <IconBell stroke={1.25} />
             </Button>
-            <Button
+            <Button size="sm"
               onPress={() => {
                 if (!document.fullscreenElement) {
                   document.documentElement.requestFullscreen();
@@ -183,7 +184,7 @@ const RightSidebarTop = () => {
             >
               <Dropdown offset={10}>
                 <DropdownTrigger>
-                  <Button variant="light" radius={"sm"} isIconOnly>
+                  <Button size="sm" variant="light" radius={"sm"} isIconOnly>
                     <IconUser stroke={1.5} />
                   </Button>
                 </DropdownTrigger>
@@ -258,6 +259,7 @@ const RightSidebarTop = () => {
                     <Select
                       placeholder="Choose a language"
                       className="max-w-xs"
+                      disabledKeys={[storedValue]}
                       onChange={(e) => {
                         setLang(e.target.value);
                         setValue(e.target.value);

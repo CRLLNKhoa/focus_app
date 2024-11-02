@@ -14,6 +14,7 @@ import { Toaster } from "react-hot-toast";
 import Soundboard from "@/components/layout/soundboard";
 import { ClerkProvider } from "@clerk/nextjs";
 import { Suspense } from "react";
+import Spaces from "@/components/layout/spaces";
 
 export const metadata: Metadata = {
   title: {
@@ -60,6 +61,7 @@ export default function RootLayout({
   
               <Calendar />
               <Soundboard />
+              <Spaces />
   
   
               <Toaster />
