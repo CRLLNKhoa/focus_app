@@ -37,15 +37,17 @@ function AdminPage() {
       refetch();
     },
   });
+  const [filter, setFilter] = useState<TSpace[]>([]);
+  const [key,setKey] = useState("")
 
   useEffect(() => {
-      if (mutation.data?.status === 200) {
-          toast.success("Đã tạo không gian mới !")
-      } else if (mutation.data?.status === 500) {
-        toast.error("Đã xảy ra lỗi !")
-      } else if(mutation.data?.status === 403){
-        toast.error("Bạn không có quyền thay đổi !")
-      }
+    if (mutation.data?.status === 200) {
+      toast.success("Đã tạo không gian mới !");
+    } else if (mutation.data?.status === 500) {
+      toast.error("Đã xảy ra lỗi !");
+    } else if (mutation.data?.status === 403) {
+      toast.error("Bạn không có quyền thay đổi !");
+    }
   }, [mutation.data]);
 
   const [inputValue, setInputValue] = useState<TSpace>({
@@ -57,10 +59,14 @@ function AdminPage() {
     image: "",
   });
 
-  const { data, error, refetch } = useQuery({
+  const { data, error, refetch, isFetched } = useQuery({
     queryKey: ["space-admin"],
-    queryFn: () => getSpaces()
+    queryFn: () => getSpaces(),
   });
+
+  useEffect(() => {
+    setFilter(data?.data || []);
+  }, [isFetched]);
 
   if (error) {
     return (
@@ -70,9 +76,26 @@ function AdminPage() {
     );
   }
 
+  if (!isFetched) {
+    return (
+      <div className="bg-[#232931] h-full pt-16 pl-[100px] pr-2 pb-2">
+        <div className="relative h-full w-full bg-white rounded-lg px-4 
+        flex flex-col items-center justify-center overflow-y-auto noscroll-bar">
+          <h1>Loading...</h1>
+        </div>
+      </div>
+    );
+  }
+
   const handleCreate = async () => {
-    if(inputValue?.title === "" && inputValue?.key === "" && inputValue?.link === "" && inputValue?.src === "" && inputValue?.image === ""){
-      toast.error("Vui lòng điền đầy đủ !")
+    if (
+      inputValue?.title === "" &&
+      inputValue?.key === "" &&
+      inputValue?.link === "" &&
+      inputValue?.src === "" &&
+      inputValue?.image === ""
+    ) {
+      toast.error("Vui lòng điền đầy đủ !");
 
       return;
     }
@@ -80,7 +103,6 @@ function AdminPage() {
     const res = await createSpace(inputValue);
 
     return res;
-    
   };
 
   return (
@@ -102,9 +124,17 @@ function AdminPage() {
             {listBtnFilter.map((item) => (
               <Button
                 className=""
-                variant="bordered"
+                variant={key === item.key ? "solid" : "bordered"}
                 radius="sm"
                 key={item.key}
+                onPress={() =>
+                {
+                  setFilter(
+                    data?.data.filter((btn) => btn.key === item.key) || []
+                  )
+                  setKey(item.key)
+                }
+                }
               >
                 {item.label}
               </Button>
@@ -112,7 +142,9 @@ function AdminPage() {
           </div>
         </div>
         <div className="grid grid-cols-6 gap-4 pb-2">
-          {data?.data?.map((item) => <CardSpaceAdmin key={item.id} data={item} />)}
+          {filter.map((item) => (
+            <CardSpaceAdmin key={item.id} data={item} />
+          ))}
         </div>
       </div>
 
@@ -124,60 +156,73 @@ function AdminPage() {
                 Thêm không gian mới
               </ModalHeader>
               <ModalBody>
-                  <div className="flex flex-col gap-2">
-                    <Input required
-                      value={inputValue.title}
-                      onChange={(e) =>
-                        setInputValue({ ...inputValue, title: e.target.value })
-                      }
-                      type="text"
-                      label="Tên không gian"
-                    />
-                    <Input required
-                      value={inputValue.src}
-                      onChange={(e) =>
-                        setInputValue({ ...inputValue, src: e.target.value })
-                      }
-                      type="text"
-                      label="Nguồn"
-                    />
-                    <Input required
-                      value={inputValue.link}
-                      onChange={(e) =>
-                        setInputValue({ ...inputValue, link: e.target.value })
-                      }
-                      type="text"
-                      label="Liên kết Youtube"
-                    /> 
-                    <Input required
-                      value={inputValue.image}
-                      onChange={(e) =>
-                        setInputValue({ ...inputValue, image: e.target.value })
-                      }
-                      type="text"
-                      label="Ảnh nền"
-                    />
-                    <Select required
-                      label="Chọn chủ đề"
-                      className="max-w-xs"
-                      value={inputValue.key}
-                      onChange={(e) =>
-                        setInputValue({ ...inputValue, key: String(e.target.value) })
-                      }
-                    >
-                      {listBtnFilter.map((item) => (
-                        <SelectItem key={item.key} value={item.key}>
-                          {item.label}
-                        </SelectItem>
-                      ))}
-                    </Select>
-                  </div>
+                <div className="flex flex-col gap-2">
+                  <Input
+                    required
+                    value={inputValue.title}
+                    onChange={(e) =>
+                      setInputValue({ ...inputValue, title: e.target.value })
+                    }
+                    type="text"
+                    label="Tên không gian"
+                  />
+                  <Input
+                    required
+                    value={inputValue.src}
+                    onChange={(e) =>
+                      setInputValue({ ...inputValue, src: e.target.value })
+                    }
+                    type="text"
+                    label="Nguồn"
+                  />
+                  <Input
+                    required
+                    value={inputValue.link}
+                    onChange={(e) =>
+                      setInputValue({ ...inputValue, link: e.target.value })
+                    }
+                    type="text"
+                    label="Liên kết Youtube"
+                  />
+                  <Input
+                    required
+                    value={inputValue.image}
+                    onChange={(e) =>
+                      setInputValue({ ...inputValue, image: e.target.value })
+                    }
+                    type="text"
+                    label="Ảnh nền"
+                  />
+                  <Select
+                    required
+                    label="Chọn chủ đề"
+                    className="max-w-xs"
+                    value={inputValue.key}
+                    onChange={(e) =>
+                      setInputValue({
+                        ...inputValue,
+                        key: String(e.target.value),
+                      })
+                    }
+                  >
+                    {listBtnFilter.map((item) => (
+                      <SelectItem key={item.key} value={item.key}>
+                        {item.label}
+                      </SelectItem>
+                    ))}
+                  </Select>
+                </div>
               </ModalBody>
               <ModalFooter>
                 <Button color="danger" variant="light" onPress={onClose}>
                   Đóng
                 </Button>
-                <Button isLoading={mutation?.isPending} disabled={mutation?.isPending} color="primary" onPress={() => mutation.mutate()}>
+                <Button
+                  isLoading={mutation?.isPending}
+                  disabled={mutation?.isPending}
+                  color="primary"
+                  onPress={() => mutation.mutate()}
+                >
                   Thêm mới
                 </Button>
               </ModalFooter>

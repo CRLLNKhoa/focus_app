@@ -23,3 +23,17 @@ export type TSpace = {
   src: string,
   image: string,
 }
+
+export type TAccount = {
+  id?: string,
+  name: string,
+  avatar: string,
+  weeklyOnlineTime: object,
+  currentWeekStart: string,
+  longestStreak: number,
+  streakCount: number,
+  hoursOnApp: number,
+  lastActiveDate: string,
+  spacesFavorite: TSpace[],
+  created_at?: any,
+}

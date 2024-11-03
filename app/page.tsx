@@ -7,8 +7,7 @@ import { useVideoStore } from "@/stores/video";
 import { cn } from "@/libs/utils";
 import { useQuery } from "@tanstack/react-query";
 import { getSpaces } from "@/actions/space";
-import { IconLoader, IconLoaderQuarter } from "@tabler/icons-react";
-import { di } from "@fullcalendar/core/internal-common";
+import { IconLoaderQuarter } from "@tabler/icons-react";
 
 export default function Home() {
   const [isClient, setIsClient] = useState(false);
@@ -16,7 +15,6 @@ export default function Home() {
   const volume = useVideoStore((state) => state.volume);
   const fullscreen = useVideoStore((state) => state.fullscreen);
   const playing = useVideoStore((state) => state.playing);
-  const setPlay = useVideoStore((state) => state.setPlay);
   const video = useVideoStore((state) => state.video);
   const setVideo = useVideoStore((state) => state.setVideo);
 
@@ -24,9 +22,9 @@ export default function Home() {
     setIsClient(true);
   }, []);
 
-  const { data, isPending } = useQuery({
+  const { data,isSuccess } = useQuery({
     queryKey: ["space"],
-    queryFn: () => getSpaces(),
+    queryFn: () => getSpaces()
   });
 
   useEffect(() => {
@@ -42,11 +40,11 @@ export default function Home() {
         key: "",
       }
     );
-  }, [data]);
+  }, [isSuccess]);
 
   return (
     <section className="w-full h-full bg-black overflow-hidden relative">
-      {isClient && video.link ? (
+      {isClient ? (
         <div
           className={cn(
             "w-full h-full duration-1000 transition-all",

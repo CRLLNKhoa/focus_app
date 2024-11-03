@@ -20,7 +20,7 @@ export const useVideoStore = create<storeType>((set) => ({
   muted: false,
   toggleMuted: () => set((state) => ({ muted: !state.muted })),
 
-  volume: 0.5,
+  volume: 0.2,
   setVolume: (volume) => set({ volume }),
 
   fullscreen: false,

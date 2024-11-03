@@ -53,9 +53,15 @@
         "subtitle1": "Trending Spaces",
         "title2": "Recommended Spaces"
       }
+    },
+    "modalSteak": {
+      "title": "Yours stats",
+      "item1": "Longest streak",
+      "item2": "Hours on app",
+      "item3": "Time spent on app"
     }
   },
-  
+
   "vi": {
     "title": "Next.js + NextUI",
     "description": "Make beautiful websites regardless of your design experience.",
@@ -110,6 +116,12 @@
         "subtitle1": "Thịnh hành",
         "title2": "Không gian được đề xuất"
       }
+    },
+    "modalSteak": {
+      "title": "Xem số liệu hàng ngày",
+      "item1": "Chuỗi dài nhất",
+      "item2": "Thời gian online",
+      "item3": "Thời gian dành cho ứng dụng"
     }
   }
 }

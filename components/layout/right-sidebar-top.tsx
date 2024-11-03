@@ -43,6 +43,10 @@ import { useUser } from "@clerk/clerk-react";
 import { useVideoStore } from "@/stores/video";
 import { Avatar } from "@nextui-org/avatar";
 import { SignOutButton } from '@clerk/nextjs'
+import { useQuery } from "@tanstack/react-query";
+import { getAccount } from "@/actions/user";
+import { useAccountStore } from "@/stores/user";
+import { TAccount } from "@/types";
 
 const RightSidebarTop = () => {
   const [fullScreen, setFullScreen] = useState(false);
@@ -64,6 +68,17 @@ const RightSidebarTop = () => {
   const playing = useVideoStore((state) => state.playing);
   const togglePlaying = useVideoStore((state) => state.togglePlaying);
   const { user } = useUser();
+  const setAccount = useAccountStore((state) => state.setAccount);
+  const {data, isFetched} = useQuery({
+    queryKey: ["user"],
+    queryFn: () => getAccount()
+  });
+
+  useEffect(() => {
+    if(data?.data) {
+      setAccount(data?.data[0] || undefined);
+    }
+  }, [isFetched]);
 
   useEffect(() => {
     setLang(storedValue);

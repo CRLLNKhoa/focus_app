@@ -16,13 +16,14 @@ function AllSpaceTab() {
   const scrollRef = useRef<any>(null);
   const t = useLangStore((state) => state.lang);
   const [listSpace, setListSpace] = useState<TSpace[]>([]);
-  const {data, isLoading} = useQuery({
+  const [key, setKey] = useState("all");
+  const { data, isLoading } = useQuery({
     queryKey: ["space"],
-    queryFn: () => getSpaces()
-  })
+    queryFn: () => getSpaces(),
+  });
 
   useEffect(() => {
-    setListSpace(data?.data || [])
+    setListSpace(data?.data || []);
   }, [data]);
 
   const handleWheel = (event: any) => {
@@ -41,11 +42,13 @@ function AllSpaceTab() {
           onWheel={handleWheel}
           className=" w-full overflow-x-auto flex items-center gap-2 pr-2 pb-1 custom-scrollbar"
         >
-          <Button onPress={() => setListSpace(data?.data || [])}
+          <Button
+            onPress={() => setListSpace(data?.data || [])}
             isIconOnly
             radius="sm"
             variant="faded"
             className="border-none w-12"
+            color={key === "all" ? "primary" : "default"}
           >
             All
           </Button>
@@ -57,7 +60,17 @@ function AllSpaceTab() {
               content={item.label}
               placement="bottom"
             >
-              <Button onPress={() => setListSpace(data?.data?.filter((space) => space.key === item.key) || [])} isIconOnly radius="sm" variant="bordered">
+              <Button
+                onPress={() => {
+                  setListSpace(
+                    data?.data?.filter((space) => space.key === item.key) || []
+                  );
+                  setKey(item.key);
+                }}
+                isIconOnly
+                radius="sm"
+                variant={key === item.key ? "solid" : "bordered"}
+              >
                 <img src={item.icon} alt="natural" className="size-6" />
               </Button>
             </Tooltip>
@@ -79,28 +92,28 @@ function AllSpaceTab() {
           {isLoading && (
             <>
               <Skeleton className="rounded-lg">
-              <div className="h-24 rounded-lg bg-default-300"></div>
+                <div className="h-24 rounded-lg bg-default-300"></div>
               </Skeleton>
               <Skeleton className="rounded-lg">
-              <div className="h-24 rounded-lg bg-default-300"></div>
+                <div className="h-24 rounded-lg bg-default-300"></div>
               </Skeleton>
               <Skeleton className="rounded-lg">
-              <div className="h-24 rounded-lg bg-default-300"></div>
+                <div className="h-24 rounded-lg bg-default-300"></div>
               </Skeleton>
               <Skeleton className="rounded-lg">
-              <div className="h-24 rounded-lg bg-default-300"></div>
+                <div className="h-24 rounded-lg bg-default-300"></div>
               </Skeleton>
               <Skeleton className="rounded-lg">
-              <div className="h-24 rounded-lg bg-default-300"></div>
+                <div className="h-24 rounded-lg bg-default-300"></div>
               </Skeleton>
               <Skeleton className="rounded-lg">
-              <div className="h-24 rounded-lg bg-default-300"></div>
+                <div className="h-24 rounded-lg bg-default-300"></div>
               </Skeleton>
               <Skeleton className="rounded-lg">
-              <div className="h-24 rounded-lg bg-default-300"></div>
+                <div className="h-24 rounded-lg bg-default-300"></div>
               </Skeleton>
               <Skeleton className="rounded-lg">
-              <div className="h-24 rounded-lg bg-default-300"></div>
+                <div className="h-24 rounded-lg bg-default-300"></div>
               </Skeleton>
             </>
           )}

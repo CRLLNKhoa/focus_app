@@ -46,24 +46,25 @@ export default function RootLayout({
         <body
           className={clsx(
             "min-h-screen bg-background font-sans antialiased",
-            fontSans.variable,
+            fontSans.variable
           )}
         >
           <Providers themeProps={{ attribute: "class", defaultTheme: "light" }}>
             <>
-              <div className="relative w-full h-screen">
-                {children}
-              </div>
-  
-              <LeftSidebarTop />
+              <div className="relative w-full h-screen">{children}</div>
+
+              <Suspense>
+                <LeftSidebarTop />
+              </Suspense>
               <LeftMenuApp />
-              <Suspense><RightSidebarTop /></Suspense>
-  
+              <Suspense>
+                <RightSidebarTop />
+              </Suspense>
+
               <Calendar />
               <Soundboard />
               <Spaces />
-  
-  
+
               <Toaster />
             </>
           </Providers>

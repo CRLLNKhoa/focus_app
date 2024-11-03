@@ -5,10 +5,15 @@ import { Tabs, Tab } from "@nextui-org/tabs";
 import { useLangStore } from "@/stores/lang";
 import AllSpaceTab from "./all-space-tab";
 import { Button } from "@nextui-org/button";
-import {  IconHeart, IconVolume, IconVolumeOff, IconX } from "@tabler/icons-react";
+import {  IconHeart, IconHeartFilled, IconVolume, IconVolumeOff, IconX } from "@tabler/icons-react";
 import { useVideoStore } from "@/stores/video";
 import { Slider } from "@nextui-org/slider";
 import { useToggleStore } from "@/stores/toggle";
+import Favorites from "../favorites";
+import { useMutation } from "@tanstack/react-query";
+import { favoriteSpace } from "@/actions/user";
+import { useAccountStore } from "@/stores/user";
+import { TSpace } from "@/types";
 
 function Spaces() {
   const t = useLangStore((state) => state.lang);
@@ -19,6 +24,7 @@ function Spaces() {
   const isShow = useToggleStore((state) => state.space);
   const toggleSpace = useToggleStore((state) => state.toggleSpace);
   const video = useVideoStore((state) => state.video);
+  const favoiriteSpaceStore = useAccountStore((state) => state.favoiriteSpace);
 
   const handleVolumeChange = (value:any) => {
     if (isNaN(Number(value))) return;
@@ -26,6 +32,17 @@ function Spaces() {
 
     
     setVolume(newVolume);
+  };
+
+  const account = useAccountStore((state) => state.user);
+
+  const mutation = useMutation({
+    mutationFn: () => favoriteSpace(account?.spacesFavorite || []),
+  });
+
+  const handleFavorite = async (space: TSpace) => {
+    favoiriteSpaceStore(space);
+    mutation.mutate();
   };
 
   return (
@@ -54,7 +71,9 @@ function Spaces() {
               <Tab key="spaces" className="p-0" title={t.spaces.tab.item1}>
                 <AllSpaceTab />
               </Tab>
-              <Tab key="favorites" className="p-0" title={t.spaces.tab.item2} />
+              <Tab key="favorites" className="p-0" title={t.spaces.tab.item2}>
+                <Favorites />
+              </Tab>
             </Tabs>
           </div>
           <div className="flex flex-col mt-auto border-t dark:border-slate-600 shadow-lg p-4 gap-2 
@@ -64,8 +83,12 @@ function Spaces() {
                     <h2 className="line-clamp-1 text-sm">{video.title !== "" ? video.title : "Loading..."}</h2> 
                     <p className="text-xs bg-gradient-to-r from-red-600 to-purple-400 inline-block text-transparent bg-clip-text">@{video.src !== "" ? video.src : "Loading..."}</p>
                 </div>
-                <Button isIconOnly variant="light" className="text-red-500">
-                    <IconHeart stroke={1.2} />
+                <Button isLoading={mutation.isPending} onPress={() => handleFavorite(video)} isIconOnly variant="light" className="text-red-500">
+                    {account?.spacesFavorite?.find((item) => item.id === video.id) ? (
+                        <IconHeartFilled />
+                    ) : (
+                        <IconHeart stroke={1.5} />
+                    )}
                 </Button>
             </div>
             <Slider
@@ -97,16 +120,17 @@ function Spaces() {
             />
           </div>
 
-          <div className="bg-white dark:bg-[#232931] absolute top-0 right-0 rounded-e-lg">
+          {/* <div className="bg-white dark:bg-[#232931] absolute top-0 right-0 rounded-e-lg">
               <Button
                 onPress={() => toggleSpace(false)}
                 variant="light"
                 isIconOnly
-                radius="sm"
+                radius="none"
+                size="sm"
               >
                 <IconX stroke={1.5} />
               </Button>
-            </div>
+            </div> */}
         </motion.div>
             )
         }
