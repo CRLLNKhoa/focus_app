@@ -5,12 +5,18 @@ import React, { use } from "react";
 import { Image } from "@nextui-org/image";
 import { TSpace } from "@/types";
 import { useVideoStore } from "@/stores/video";
+import { viewSpace } from "@/actions/space";
 
 function CardSpace({data}:{data:TSpace}) {
   const setVideo = useVideoStore((state) => state.setVideo);
 
+  const handleView = async () => {
+    setVideo(data);
+    await viewSpace(data.id!);
+  };
+
   return (
-    <div className="flex flex-col" onClick={() => setVideo(data)}>
+    <div className="flex flex-col" onClick={handleView}>
       <div className="w-full group">
         <Image
           height={90}

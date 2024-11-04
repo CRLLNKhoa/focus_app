@@ -76,7 +76,7 @@ const RightSidebarTop = () => {
 
   useEffect(() => {
     if(data?.data) {
-      setAccount(data?.data[0] || undefined);
+      setAccount(data?.data[0] || null);
     }
   }, [isFetched]);
 

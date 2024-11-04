@@ -15,6 +15,7 @@ import Soundboard from "@/components/layout/soundboard";
 import { ClerkProvider } from "@clerk/nextjs";
 import { Suspense } from "react";
 import Spaces from "@/components/layout/spaces";
+import Youtube from "@/components/youtube";
 
 export const metadata: Metadata = {
   title: {
@@ -45,13 +46,15 @@ export default function RootLayout({
       <ClerkProvider>
         <body
           className={clsx(
-            "min-h-screen bg-background font-sans antialiased",
+            "min-h-screen bg-background font-sans antialiased overflow-hidden",
             fontSans.variable
           )}
         >
           <Providers themeProps={{ attribute: "class", defaultTheme: "light" }}>
             <>
-              <div className="relative w-full h-screen">{children}</div>
+              <div className="relative w-full h-screen overflow-hidden">
+                {children}
+              </div>
 
               <Suspense>
                 <LeftSidebarTop />
@@ -64,6 +67,10 @@ export default function RootLayout({
               <Calendar />
               <Soundboard />
               <Spaces />
+
+              <div className="absolute top-16 left-[98px] right-2 bottom-2 bg-transparent">
+                <Youtube />
+              </div>
 
               <Toaster />
             </>

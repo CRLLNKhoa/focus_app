@@ -15,14 +15,16 @@ const LeftSidebarTop = () => {
     mutationFn: () => upgradeAccount(),
     onSuccess: () => {
       setAccount(data?.data);
+      document.location.reload();
     },
   });
+
 
   return (
     <div className={" absolute top-2 left-2 flex items-center gap-2"}>
       <div
         className={
-          "bg-white dark:bg-[#232931] p-[6px] px-2 flex items-center gap-1 rounded-md"
+          "bg-white shadow-lg dark:bg-[#232931] p-[6px] px-2 flex items-center gap-1 rounded-md"
         }
       >
         <Button
@@ -39,7 +41,7 @@ const LeftSidebarTop = () => {
         >
           <ModalSteak />
         </div>
-        {account?.id && account !== undefined ? (
+        {account?.id ? (
           <Button
             isLoading={isPending}
             variant={"light"}
@@ -50,7 +52,7 @@ const LeftSidebarTop = () => {
             Hello! {account?.name}
           </Button>
         ) : (
-          account !== undefined && (
+          account === null && (
             <Button
               onPress={() => mutateAsync()}
               isLoading={isPending}
@@ -68,7 +70,7 @@ const LeftSidebarTop = () => {
 
       <div
         className={
-          "bg-white dark:bg-[#232931] p-[6px] flex items-center gap-1 rounded-md"
+          "bg-white shadow-lg dark:bg-[#232931] p-[6px] flex items-center gap-1 rounded-md"
         }
       >
         <Button

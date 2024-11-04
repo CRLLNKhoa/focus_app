@@ -10,6 +10,9 @@ type storeType = {
 
   space: boolean;
   toggleSpace: (t:boolean) => void
+
+  media: boolean;
+  toggleMedia: (t:boolean) => void
 } 
 
 export const useToggleStore = create<storeType>((set) => ({
@@ -21,4 +24,7 @@ export const useToggleStore = create<storeType>((set) => ({
 
   space: false,
   toggleSpace: (t) => set(() => ({ space: t })),
+
+  media: false,
+  toggleMedia: (t) => set(() => ({ media: t })),
 }))
