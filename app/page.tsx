@@ -70,7 +70,10 @@ export default function Home() {
                 playerVars: {
                   showinfo: 0,
                   controls: 0,
-                  disablekb: 1,           
+                  disablekb: 1,     
+                  modestbranding: 1,
+                  fs: 0,  
+                  sub: 0,
                 },
               },
             }}
