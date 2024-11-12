@@ -16,6 +16,9 @@ import { ClerkProvider } from "@clerk/nextjs";
 import { Suspense } from "react";
 import Spaces from "@/components/layout/spaces";
 import Youtube from "@/components/youtube";
+import Tasks from "@/components/tasks";
+import FlashCard from "@/components/layout/flash-card";
+import LearnCard from "@/components/flash-card/learn-card";
 
 export const metadata: Metadata = {
   title: {
@@ -70,6 +73,9 @@ export default function RootLayout({
 
               <div className="absolute top-16 left-[98px] right-2 bottom-2 bg-transparent">
                 <Youtube />
+                <Tasks />
+                <FlashCard />
+                <LearnCard />
               </div>
 
               <Toaster />

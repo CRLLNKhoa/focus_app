@@ -1,3 +1,4 @@
+import { TTag } from "@/data/tags";
 import { SVGProps } from "react";
 
 export type IconSvgProps = SVGProps<SVGSVGElement> & {
@@ -11,6 +12,16 @@ export type TEvent = {
   end: string,
   description: string,
   color: string,
+}
+
+export type TTask = {
+  id: number,
+  title: string,
+  description: string,
+  isCompeleted: boolean,
+  tags: TTag,
+  user_id?: string,
+  deadine?: string,
 }
 
 export type TSpace = {

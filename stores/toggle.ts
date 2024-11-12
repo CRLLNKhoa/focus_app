@@ -13,6 +13,12 @@ type storeType = {
 
   media: boolean;
   toggleMedia: (t:boolean) => void
+
+  task: boolean;
+  toggleTask: (t:boolean) => void
+
+  flashcard: boolean;
+  toggleFlashcard: (t:boolean) => void
 } 
 
 export const useToggleStore = create<storeType>((set) => ({
@@ -27,4 +33,10 @@ export const useToggleStore = create<storeType>((set) => ({
 
   media: false,
   toggleMedia: (t) => set(() => ({ media: t })),
+
+  task: false,
+  toggleTask: (t) => set(() => ({ task: t })),
+
+  flashcard: false,
+  toggleFlashcard: (t) => set(() => ({ flashcard: t }))
 }))

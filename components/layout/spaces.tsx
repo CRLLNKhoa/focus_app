@@ -10,7 +10,6 @@ import {
   IconHeartFilled,
   IconVolume,
   IconVolumeOff,
-  IconX,
 } from "@tabler/icons-react";
 import { useVideoStore } from "@/stores/video";
 import { Slider } from "@nextui-org/slider";
@@ -29,7 +28,6 @@ function Spaces() {
   const muted = useVideoStore((state) => state.muted);
   const setMuted = useVideoStore((state) => state.toggleMuted);
   const isShow = useToggleStore((state) => state.space);
-  const toggleSpace = useToggleStore((state) => state.toggleSpace);
   const video = useVideoStore((state) => state.video);
   const favoiriteSpaceStore = useAccountStore((state) => state.favoiriteSpace);
 
@@ -99,7 +97,7 @@ function Spaces() {
             animate={{ opacity: 1, scale: 1, x: 0, y: 0 }}
             exit={{ opacity: 0, scale: 0.5, x: -100, y: 0 }}
             transition={{ duration: 0.2 }}
-            className="absolute top-16 left-[102px] bg-white bottom-2 w-[360px] z-50 shadow-xl
+            className="absolute top-16 left-[90px] bg-white bottom-2 w-[360px] z-50 shadow-xl
                 dark:bg-[#232931] flex flex-col rounded-md gap-2 overflow-y-auto noscroll-bar"
           >
             <div className="">

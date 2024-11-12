@@ -22,16 +22,14 @@ export const upgradeAccount = async () => {
       avatar: user?.imageUrl,
       weeklyOnlineTime: getObjectOfCurrentWeek(),
       currentWeekStart: getStartOfCurrentWeek(),
-      streakCount: 0,
+      streakCount: 1,
       hoursOnApp: 0,
-      longestStreak: 0,
+      longestStreak: 1,
       lastActiveDate: getCurrentDate(),
       spacesFavorite: [],
     });
 
     if (error) {
-      console.log("1", error);
-      // Print: the error message
 
       return {
         status: 500,

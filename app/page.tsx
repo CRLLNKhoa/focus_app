@@ -51,7 +51,7 @@ export default function Home() {
             fullscreen ? "scale-100" : "scale-150"
           )}
         >
-          <ReactPlayer
+          {/* <ReactPlayer
             url={video.link}
             loop={true}
             muted={muted}
@@ -77,7 +77,7 @@ export default function Home() {
                 },
               },
             }}
-          />
+          /> */}
         </div>
       ) : (
         <div

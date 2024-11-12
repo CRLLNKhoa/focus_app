@@ -38,6 +38,7 @@ function Youtube() {
         width={460}
         height={260}
         minConstraints={[460, 260]}
+        maxConstraints={[960, 560]}
         resizeHandles={["se"]}
       >
         <div

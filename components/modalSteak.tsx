@@ -50,7 +50,7 @@ function ModalSteak() {
           radius={"sm"}
           className={"flex items-center text-md"}
         >
-          {account?.streakCount || 1} 🔥
+          {account?.streakCount} 🔥
         </Button>
       </Tooltip>
 

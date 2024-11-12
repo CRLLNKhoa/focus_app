@@ -19,7 +19,7 @@ import { TSpace } from "@/types";
 import toast from "react-hot-toast";
 import CardSpaceAdmin from "@/components/card-space-admin";
 
-function AdminPage() {
+function ManageSpace() {
   const { isOpen, onOpen, onOpenChange } = useDisclosure();
   const mutation = useMutation({
     mutationFn: () => handleCreate(),
@@ -37,7 +37,7 @@ function AdminPage() {
     },
   });
   const [filter, setFilter] = useState<TSpace[]>([]);
-  const [key,setKey] = useState("")
+  const [key, setKey] = useState("");
 
   useEffect(() => {
     if (mutation.data?.status === 200) {
@@ -77,9 +77,11 @@ function AdminPage() {
 
   if (!isFetched) {
     return (
-      <div className="bg-[#232931] h-full pt-16 pl-[100px] pr-2 pb-2">
-        <div className="relative h-full w-full bg-white rounded-lg px-4 
-        flex flex-col items-center justify-center overflow-y-auto noscroll-bar">
+      <div className="bg-white h-full pt-16 pl-[100px] pr-2 pb-2">
+        <div
+          className="relative h-full w-full bg-white rounded-lg px-4 
+          flex flex-col items-center justify-center overflow-y-auto noscroll-bar"
+        >
           <h1>Loading...</h1>
         </div>
       </div>
@@ -105,8 +107,8 @@ function AdminPage() {
   };
 
   return (
-    <div className="bg-[#232931] h-full pt-16 pl-[100px] pr-2 pb-2">
-      <div className="relative h-full w-full bg-white rounded-lg px-4 flex flex-col overflow-y-auto noscroll-bar">
+    <>
+      <div className="flex flex-col gap-4">
         <div className="flex flex-col gap-2 sticky top-0 z-50 bg-white pt-2">
           <div className="flex items-center justify-between">
             <h1 className="font-bold text-xl">Quản lý các không gian</h1>
@@ -126,14 +128,12 @@ function AdminPage() {
                 variant={key === item.key ? "solid" : "bordered"}
                 radius="sm"
                 key={item.key}
-                onPress={() =>
-                {
+                onPress={() => {
                   setFilter(
                     data?.data.filter((btn) => btn.key === item.key) || []
-                  )
-                  setKey(item.key)
-                }
-                }
+                  );
+                  setKey(item.key);
+                }}
               >
                 {item.label}
               </Button>
@@ -229,8 +229,8 @@ function AdminPage() {
           )}
         </ModalContent>
       </Modal>
-    </div>
+    </>
   );
 }
 
-export default AdminPage;
+export default ManageSpace;
