@@ -19,6 +19,7 @@ import Youtube from "@/components/youtube";
 import Tasks from "@/components/tasks";
 import FlashCard from "@/components/layout/flash-card";
 import LearnCard from "@/components/flash-card/learn-card";
+import DailyEnglish from "@/components/daily-english/dailyEnglish";
 
 export const metadata: Metadata = {
   title: {
@@ -76,6 +77,7 @@ export default function RootLayout({
                 <Tasks />
                 <FlashCard />
                 <LearnCard />
+                <DailyEnglish />
               </div>
 
               <Toaster />

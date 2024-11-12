@@ -3,11 +3,13 @@ import { cn } from "@/libs/utils";
 import { useLangStore } from "@/stores/lang";
 import { useToggleStore } from "@/stores/toggle";
 import { Button } from "@nextui-org/button";
+import { Tooltip } from "@nextui-org/tooltip";
 import {
   IconAdjustmentsHorizontal,
   IconBrandYoutubeKids,
   IconCalendarWeek,
   IconCards,
+  IconLanguage,
   IconPencilMinus,
   IconWorld,
 } from "@tabler/icons-react";
@@ -27,6 +29,10 @@ function LeftMenuApp() {
   const toggleTask = useToggleStore((state) => state.toggleTask);
   const isShowFlashcard = useToggleStore((state) => state.flashcard);
   const toggleFlashcard = useToggleStore((state) => state.toggleFlashcard);
+  const isShowDailyEnglish = useToggleStore((state) => state.englishDaily);
+  const toggleDailyEnglish = useToggleStore(
+    (state) => state.toggleEnglishDaily
+  );
 
   const handleToggle = (tab: "calendar" | "soundboard" | "space") => {
     if (tab === "calendar") {
@@ -59,29 +65,43 @@ function LeftMenuApp() {
   return (
     <div className="absolute top-16 bottom-2 left-2 flex flex-col gap-3">
       <div className="bg-white shadow-lg dark:bg-[#232931] p-2 flex flex-col rounded-md gap-2">
-        <Button
-          variant="light"
-          radius="sm"
-          size="sm"
-          onPress={() => handleToggle("space")}
-          isIconOnly
-          className={cn(
-            "flex flex-col items-center justify-center w-14 h-16 gap-2",
-            isShowSpace ? "text-[#E39685]" : "text-foreground-500"
-          )}
-          endContent={
-            <p
-              className={cn(
-                "-translate-y-1 text-foreground-500 mt-2",
-                isShowSpace ? "text-[#E39685]" : "text-foreground-500"
-              )}
-            >
-              {t.menu.item1}
-            </p>
-          }
+      <Tooltip
+          showArrow
+          content="Spaces"
+          placement="right"
+          offset={12}
         >
-          <IconWorld stroke={1.1} size={28} />
-        </Button>
+          <Button
+            variant="light"
+            radius="sm"
+            size="sm"
+            onPress={() => handleToggle("space")}
+            isIconOnly
+            className={cn(
+              "flex flex-col items-center justify-center w-14 h-16 gap-2",
+              isShowSpace ? "text-[#E39685]" : "text-foreground-500"
+            )}
+            endContent={
+              <p
+                className={cn(
+                  "-translate-y-1 text-foreground-500 mt-2",
+                  isShowSpace ? "text-[#E39685]" : "text-foreground-500"
+                )}
+              >
+                {t.menu.item1}
+              </p>
+            }
+          >
+            <IconWorld stroke={1.1} size={28} />
+          </Button>
+        </Tooltip>
+
+        <Tooltip
+          showArrow
+          content="Soundboard"
+          placement="right"
+          offset={12}
+        >
         <Button
           onPress={() => handleToggle("soundboard")}
           variant="light"
@@ -105,6 +125,15 @@ function LeftMenuApp() {
         >
           <IconAdjustmentsHorizontal stroke={1.3} size={28} />
         </Button>
+        </Tooltip>
+
+
+        <Tooltip
+          showArrow
+          content="Event Calendar"
+          placement="right"
+          offset={12}
+        >
         <Button
           onPress={() => handleToggle("calendar")}
           variant="light"
@@ -128,77 +157,117 @@ function LeftMenuApp() {
         >
           <IconCalendarWeek stroke={1.8} size={28} />
         </Button>
+        </Tooltip>
       </div>
       <div className="bg-white shadow-lg dark:bg-[#232931] p-2 rounded-md flex flex-col gap-2 overflow-x-auto noscroll-bar">
-        <Button
-          variant="light"
-          radius="sm"
-          size="sm"
-          onPress={() => toggleMedia(!isShowMedia)}
-          isIconOnly
-          endContent={
-            <p
+        <Tooltip showArrow content="Youtube" placement="right" offset={12}>
+          <Button
+            variant="light"
+            radius="sm"
+            size="sm"
+            onPress={() => toggleMedia(!isShowMedia)}
+            isIconOnly
+            endContent={
+              <p
+                className={cn(
+                  "-translate-y-1 text-foreground-500 mt-2",
+                  isShowMedia ? "text-[#E39685]" : "text-foreground-500"
+                )}
+              >
+                Media
+              </p>
+            }
             className={cn(
-              "-translate-y-1 text-foreground-500 mt-2",
+              "flex flex-col items-center justify-center w-14 h-16 gap-0",
               isShowMedia ? "text-[#E39685]" : "text-foreground-500"
             )}
           >
-            Media
-          </p>
-          }
-          className={cn(
-            "flex flex-col items-center justify-center w-14 h-16 gap-0",
-            isShowMedia ? "text-[#E39685]" : "text-foreground-500"
-          )}
-        >
-          <IconBrandYoutubeKids stroke={1.1} size={28} />
-        </Button>
-        <Button
-          onPress={() => toggleTask(!isShowTask)}
-          variant="light"
-          radius="sm"
-          size="sm"
-          isIconOnly
-          endContent={
-            <p
+            <IconBrandYoutubeKids stroke={1.1} size={28} />
+          </Button>
+        </Tooltip>
+
+        <Tooltip showArrow content="List Tasks" placement="right" offset={12}>
+          <Button
+            onPress={() => toggleTask(!isShowTask)}
+            variant="light"
+            radius="sm"
+            size="sm"
+            isIconOnly
+            endContent={
+              <p
+                className={cn(
+                  "-translate-y-1 text-foreground-500 mt-2",
+                  isShowTask ? "text-[#E39685]" : "text-foreground-500"
+                )}
+              >
+                Tasks
+              </p>
+            }
             className={cn(
-              "-translate-y-1 text-foreground-500 mt-2",
+              "flex flex-col items-center justify-center w-14 h-16 gap-2",
               isShowTask ? "text-[#E39685]" : "text-foreground-500"
             )}
           >
-            Tasks
-          </p>
-          }
-          className={cn(
-            "flex flex-col items-center justify-center w-14 h-16 gap-2",
-            isShowTask ? "text-[#E39685]" : "text-foreground-500"
-          )}
-        >
-          <IconPencilMinus stroke={1.3} size={28} />
-        </Button>
-        <Button
-          onPress={() => toggleFlashcard(!isShowFlashcard)}
-          variant="light"
-          radius="sm"
-          size="sm"
-          isIconOnly
-          endContent={
-            <p
+            <IconPencilMinus stroke={1.3} size={28} />
+          </Button>
+        </Tooltip>
+
+        <Tooltip showArrow content="Flash Cards" placement="right" offset={12}>
+          <Button
+            onPress={() => toggleFlashcard(!isShowFlashcard)}
+            variant="light"
+            radius="sm"
+            size="sm"
+            isIconOnly
+            endContent={
+              <p
+                className={cn(
+                  "-translate-y-1 text-foreground-500 mt-2",
+                  isShowFlashcard ? "text-[#E39685]" : "text-foreground-500"
+                )}
+              >
+                Cards
+              </p>
+            }
             className={cn(
-              "-translate-y-1 text-foreground-500 mt-2",
+              "flex flex-col items-center justify-center w-14 h-16 gap-2",
               isShowFlashcard ? "text-[#E39685]" : "text-foreground-500"
             )}
           >
-            Cards
-          </p>
-          }
-          className={cn(
-            "flex flex-col items-center justify-center w-14 h-16 gap-2",
-            isShowFlashcard ? "text-[#E39685]" : "text-foreground-500"
-          )}
+            <IconCards stroke={1.5} size={28} />
+          </Button>
+        </Tooltip>
+
+        <Tooltip
+          showArrow
+          content="Daily English"
+          placement="right"
+          offset={12}
         >
-          <IconCards stroke={1.5} size={28} />
-        </Button>
+          <Button
+            onPress={() => toggleDailyEnglish(!isShowDailyEnglish)}
+            variant="light"
+            radius="sm"
+            size="sm"
+            isIconOnly
+            endContent={
+              <p
+                className={cn(
+                  "-translate-y-1 text-foreground-500 mt-2",
+                  isShowDailyEnglish ? "text-[#E39685]" : "text-foreground-500"
+                )}
+              >
+                Daily
+              </p>
+            }
+            className={cn(
+              "flex flex-col items-center justify-center w-14 h-16 gap-2",
+              isShowDailyEnglish ? "text-[#E39685]" : "text-foreground-500"
+            )}
+          >
+            <IconLanguage stroke={1.5} size={28} />
+          </Button>
+        </Tooltip>
       </div>
     </div>
   );

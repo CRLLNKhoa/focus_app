@@ -19,6 +19,9 @@ type storeType = {
 
   flashcard: boolean;
   toggleFlashcard: (t:boolean) => void
+
+  englishDaily: boolean;
+  toggleEnglishDaily: (t:boolean) => void
 } 
 
 export const useToggleStore = create<storeType>((set) => ({
@@ -38,5 +41,8 @@ export const useToggleStore = create<storeType>((set) => ({
   toggleTask: (t) => set(() => ({ task: t })),
 
   flashcard: false,
-  toggleFlashcard: (t) => set(() => ({ flashcard: t }))
+  toggleFlashcard: (t) => set(() => ({ flashcard: t })),
+
+  englishDaily: false,
+  toggleEnglishDaily: (t) => set(() => ({ englishDaily: t }))
 }))
